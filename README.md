@@ -53,3 +53,15 @@ The code was written with an AI assistant (Claude) and reviewed by the author, a
 ## Papers
 
 The papers cited are listed with DOIs in the thesis References. Their PDFs are not included because they are the copyright of their publishers.
+
+
+## Literature search
+
+The literature search used Consensus (consensus.app), as stated in the thesis's AI Use Statement. Shared search threads:
+
+1. [Charity Donation Distrust Effects](https://consensus.app/search/charity-donation-distrust-effects/LDCjcg58QzSnCwwXuiTyaw/?utm_source=share&utm_medium=clipboard)
+2. [Online Donation Platform Fees](https://consensus.app/search/online-donation-platform-fees/2nzATli8RTeg7dWQHaWgnQ/?utm_source=share&utm_medium=clipboard)
+3. [Blockchain Donation Privacy Systems](https://consensus.app/search/blockchain-donation-privacy-systems/eweYiK3kRPalDhy0tLoIUQ/?utm_source=share&utm_medium=clipboard)
+4. [Donor Privacy Anonymity Motivations](https://consensus.app/search/donor-privacy-anonymity-motivations/PeJZeqsuQnCfxn7pMP6SUQ/?utm_source=share&utm_medium=clipboard)
+5. [Blockchain Transparency and Privacy](https://consensus.app/search/blockchain-transparency-and-privacy/PxUjXxIXSjCZl4PhNijh6A/?utm_source=share&utm_medium=clipboard)
+
