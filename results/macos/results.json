@@ -1,0 +1,788 @@
+{
+  "tests": [
+    {
+      "id": "TC01",
+      "scenario": "Valid donation, correct opening",
+      "expected": "accept",
+      "actual": "accept",
+      "reason": "accepted",
+      "property": "Correctness",
+      "pass": true
+    },
+    {
+      "id": "TC02",
+      "scenario": "Amount changed after commitment",
+      "expected": "reject",
+      "actual": "reject",
+      "reason": "commitment does not match opening",
+      "property": "Binding",
+      "pass": true
+    },
+    {
+      "id": "TC03",
+      "scenario": "Charity not in approved registry",
+      "expected": "reject",
+      "actual": "reject",
+      "reason": "charity not in approved registry",
+      "property": "Rule check",
+      "pass": true
+    },
+    {
+      "id": "TC04",
+      "scenario": "Attestation signature tampered",
+      "expected": "reject",
+      "actual": "reject",
+      "reason": "invalid attestation signature",
+      "property": "Authenticity",
+      "pass": true
+    },
+    {
+      "id": "TC05",
+      "scenario": "Replay at the same verifier",
+      "expected": "reject",
+      "actual": "reject",
+      "reason": "replay: donation ID already accepted",
+      "property": "Replay resistance",
+      "pass": true
+    },
+    {
+      "id": "TC06",
+      "scenario": "Wrong nonce in the opening",
+      "expected": "reject",
+      "actual": "reject",
+      "reason": "commitment does not match opening",
+      "property": "Binding",
+      "pass": true
+    },
+    {
+      "id": "TC07",
+      "scenario": "Replay at a second, independent verifier",
+      "expected": "reject",
+      "actual": "reject",
+      "reason": "replay: donation ID already accepted",
+      "property": "Shared replay state",
+      "pass": true
+    },
+    {
+      "id": "TC08",
+      "scenario": "Same donation sent to 8 verifiers concurrently",
+      "expected": "accept",
+      "actual": "accept",
+      "reason": "1 of 8 accepted",
+      "property": "Concurrency",
+      "pass": true
+    },
+    {
+      "id": "TC09",
+      "scenario": "Replay after restart (reloaded key and registry)",
+      "expected": "reject",
+      "actual": "reject",
+      "reason": "replay: donation ID already accepted",
+      "property": "Persistence",
+      "pass": true
+    },
+    {
+      "id": "TC10",
+      "scenario": "Attestation signed by an unknown key",
+      "expected": "reject",
+      "actual": "reject",
+      "reason": "unknown auditor key",
+      "property": "Authenticity",
+      "pass": true
+    },
+    {
+      "id": "TC11",
+      "scenario": "Zero amount",
+      "expected": "reject",
+      "actual": "reject",
+      "reason": "invalid amount",
+      "property": "Input validation",
+      "pass": true
+    },
+    {
+      "id": "TC12",
+      "scenario": "Negative amount",
+      "expected": "reject",
+      "actual": "reject",
+      "reason": "invalid amount",
+      "property": "Input validation",
+      "pass": true
+    },
+    {
+      "id": "TC13",
+      "scenario": "Boolean amount (True)",
+      "expected": "reject",
+      "actual": "reject",
+      "reason": "invalid amount",
+      "property": "Input validation",
+      "pass": true
+    },
+    {
+      "id": "TC14",
+      "scenario": "NaN amount",
+      "expected": "reject",
+      "actual": "reject",
+      "reason": "invalid amount",
+      "property": "Input validation",
+      "pass": true
+    },
+    {
+      "id": "TC15",
+      "scenario": "Infinite amount",
+      "expected": "reject",
+      "actual": "reject",
+      "reason": "invalid amount",
+      "property": "Input validation",
+      "pass": true
+    },
+    {
+      "id": "TC16",
+      "scenario": "Amount as text",
+      "expected": "reject",
+      "actual": "reject",
+      "reason": "invalid amount",
+      "property": "Input validation",
+      "pass": true
+    },
+    {
+      "id": "TC17",
+      "scenario": "Amount above limit",
+      "expected": "reject",
+      "actual": "reject",
+      "reason": "invalid amount",
+      "property": "Input validation",
+      "pass": true
+    },
+    {
+      "id": "TC18",
+      "scenario": "Missing field (charityID)",
+      "expected": "reject",
+      "actual": "reject",
+      "reason": "record does not match schema",
+      "property": "Input validation",
+      "pass": true
+    },
+    {
+      "id": "TC19",
+      "scenario": "Unknown extra field",
+      "expected": "reject",
+      "actual": "reject",
+      "reason": "record does not match schema",
+      "property": "Input validation",
+      "pass": true
+    },
+    {
+      "id": "TC20",
+      "scenario": "Malformed record",
+      "expected": "reject",
+      "actual": "reject",
+      "reason": "malformed record",
+      "property": "Input validation",
+      "pass": true
+    },
+    {
+      "id": "TC21",
+      "scenario": "Attestation under an old policy version",
+      "expected": "reject",
+      "actual": "reject",
+      "reason": "statement version or result not accepted",
+      "property": "Versioning",
+      "pass": true
+    },
+    {
+      "id": "TC22",
+      "scenario": "Valid attestation reused for another donation ID",
+      "expected": "reject",
+      "actual": "reject",
+      "reason": "statement does not match ledger record",
+      "property": "Binding to record",
+      "pass": true
+    },
+    {
+      "id": "TC23",
+      "scenario": "Attestation under a revoked auditor key",
+      "expected": "reject",
+      "actual": "reject",
+      "reason": "auditor key revoked",
+      "property": "Key revocation",
+      "pass": true
+    },
+    {
+      "id": "TC24",
+      "scenario": "Key rotation: old and new attestations both verify",
+      "expected": "accept",
+      "actual": "accept",
+      "reason": "old key accepted; new key accepted",
+      "property": "Key rotation",
+      "pass": true
+    },
+    {
+      "id": "TC25",
+      "scenario": "Unsupported currency (USD)",
+      "expected": "reject",
+      "actual": "reject",
+      "reason": "unsupported currency",
+      "property": "Rule check",
+      "pass": true
+    },
+    {
+      "id": "TC26",
+      "scenario": "Opening registered under a different donation ID",
+      "expected": "reject",
+      "actual": "reject",
+      "reason": "donation ID does not match opening",
+      "property": "Binding to ID",
+      "pass": true
+    },
+    {
+      "id": "TC27",
+      "scenario": "Same donation sent to the auditor twice",
+      "expected": "reject",
+      "actual": "reject",
+      "reason": "donation ID already attested",
+      "property": "Replay resistance (auditor)",
+      "pass": true
+    }
+  ],
+  "mutations": [
+    {
+      "disabled": "commitment",
+      "failing_tests": [
+        "TC02",
+        "TC06"
+      ]
+    },
+    {
+      "disabled": "schema",
+      "failing_tests": [
+        "TC18",
+        "TC19"
+      ]
+    },
+    {
+      "disabled": "id_match",
+      "failing_tests": [
+        "TC26"
+      ]
+    },
+    {
+      "disabled": "amount",
+      "failing_tests": [
+        "TC11",
+        "TC12",
+        "TC13",
+        "TC14",
+        "TC15",
+        "TC16",
+        "TC17"
+      ]
+    },
+    {
+      "disabled": "currency",
+      "failing_tests": [
+        "TC25"
+      ]
+    },
+    {
+      "disabled": "registry",
+      "failing_tests": [
+        "TC03"
+      ]
+    },
+    {
+      "disabled": "auditor_replay",
+      "failing_tests": [
+        "TC27"
+      ]
+    },
+    {
+      "disabled": "registry_replay",
+      "failing_tests": [
+        "TC05",
+        "TC07",
+        "TC08",
+        "TC09"
+      ]
+    },
+    {
+      "disabled": "revocation",
+      "failing_tests": [
+        "TC23"
+      ]
+    },
+    {
+      "disabled": "signature",
+      "failing_tests": [
+        "TC04",
+        "TC10"
+      ]
+    },
+    {
+      "disabled": "version",
+      "failing_tests": [
+        "TC21"
+      ]
+    },
+    {
+      "disabled": "binding",
+      "failing_tests": [
+        "TC22"
+      ]
+    }
+  ],
+  "privacy_scan": [
+    {
+      "field": "amountCents",
+      "leaked": false
+    },
+    {
+      "field": "donorID",
+      "leaked": false
+    },
+    {
+      "field": "charityID",
+      "leaked": false
+    },
+    {
+      "field": "currency",
+      "leaked": false
+    },
+    {
+      "field": "nonce",
+      "leaked": false
+    }
+  ],
+  "timing_us": {
+    "commitment": {
+      "n": 5000,
+      "median": 5.75,
+      "q1": 5.625,
+      "q3": 5.875,
+      "mean": 5.869822,
+      "sd": 0.7956113565065046,
+      "min": 5.375,
+      "max": 24.625,
+      "run_means": [
+        5.900286,
+        6.141915,
+        5.77667,
+        5.677456,
+        5.8527830000000005
+      ],
+      "run_mean_ci_low": 5.653957915499857,
+      "run_mean_ci_high": 6.085686084500145
+    },
+    "auditor_check_and_sign": {
+      "n": 5000,
+      "median": 37.875,
+      "q1": 37.75,
+      "q3": 38.209,
+      "mean": 38.2662362,
+      "sd": 1.249521927386216,
+      "min": 37.333,
+      "max": 62.25,
+      "run_means": [
+        38.196494,
+        38.611244,
+        38.208206,
+        37.90924,
+        38.405997000000006
+      ],
+      "run_mean_ci_low": 37.941170731628844,
+      "run_mean_ci_high": 38.59130166837116
+    },
+    "public_verification": {
+      "n": 5000,
+      "median": 356.5,
+      "q1": 338.875,
+      "q3": 377.44775,
+      "mean": 375.514644,
+      "sd": 418.9260204906915,
+      "min": 303.542,
+      "max": 29731.583,
+      "run_means": [
+        378.20431099999996,
+        415.341628,
+        370.94187800000003,
+        357.181485,
+        355.90391800000003
+      ],
+      "run_mean_ci_low": 345.5195918232808,
+      "run_mean_ci_high": 405.50969617671916
+    },
+    "baseline_A_rule_check": {
+      "n": 5000,
+      "median": 2.75,
+      "q1": 2.708,
+      "q3": 2.833,
+      "mean": 2.8326294,
+      "sd": 0.5478060871854853,
+      "min": 2.542,
+      "max": 32.708,
+      "run_means": [
+        2.8434920000000004,
+        2.9470650000000003,
+        2.796435,
+        2.7359180000000003,
+        2.840237
+      ],
+      "run_mean_ci_low": 2.7365972364568663,
+      "run_mean_ci_high": 2.928661563543134
+    },
+    "baseline_B_signed_record_check": {
+      "n": 5000,
+      "median": 355.97950000000003,
+      "q1": 337.833,
+      "q3": 377.208,
+      "mean": 369.3358556,
+      "sd": 57.88147618339552,
+      "min": 303.5,
+      "max": 1164.083,
+      "run_means": [
+        375.83413,
+        388.00501,
+        372.273953,
+        358.32146500000005,
+        352.24472
+      ],
+      "run_mean_ci_low": 351.6387627522144,
+      "run_mean_ci_high": 387.0329484477856
+    },
+    "end_to_end": {
+      "n": 5000,
+      "median": 400.417,
+      "q1": 382.79125,
+      "q3": 421.5725,
+      "mean": 419.6507022,
+      "sd": 418.9909766389072,
+      "min": 346.792,
+      "max": 29776.125,
+      "run_means": [
+        422.30109100000004,
+        460.094787,
+        414.926754,
+        400.76818099999997,
+        400.162698
+      ],
+      "run_mean_ci_low": 389.23230198433646,
+      "run_mean_ci_high": 450.06910241566345
+    }
+  },
+  "verification_breakdown_us": {
+    "design_signature_verify": {
+      "n": 5000,
+      "median": 88.083,
+      "q1": 86.17724999999999,
+      "q3": 89.417,
+      "mean": 92.5986092,
+      "sd": 210.45664237711625,
+      "min": 81.791,
+      "max": 11260.459,
+      "run_means": [
+        88.207612,
+        89.28075299999999,
+        86.876914,
+        108.65037600000001,
+        89.977391
+      ],
+      "run_mean_ci_low": 81.36426333843062,
+      "run_mean_ci_high": 103.83295506156938
+    },
+    "design_statement_checks": {
+      "n": 5000,
+      "median": 3.084,
+      "q1": 3.0,
+      "q3": 3.333,
+      "mean": 3.4241514000000004,
+      "sd": 1.5112371074047248,
+      "min": 2.833,
+      "max": 57.584,
+      "run_means": [
+        3.130995,
+        3.191162,
+        3.570481,
+        3.835212,
+        3.392907
+      ],
+      "run_mean_ci_low": 3.0667129044916233,
+      "run_mean_ci_high": 3.7815898955083775
+    },
+    "design_registry_claim": {
+      "n": 5000,
+      "median": 247.1045,
+      "q1": 231.084,
+      "q3": 274.48975,
+      "mean": 288.6751114,
+      "sd": 602.5590317466716,
+      "min": 204.292,
+      "max": 35373.375,
+      "run_means": [
+        250.35457699999998,
+        279.461756,
+        286.896571,
+        318.533786,
+        308.128867
+      ],
+      "run_mean_ci_low": 255.67396119110856,
+      "run_mean_ci_high": 321.6762616088914
+    },
+    "B_signature_verify": {
+      "n": 5000,
+      "median": 88.625,
+      "q1": 86.125,
+      "q3": 89.709,
+      "mean": 88.8999808,
+      "sd": 19.581398161327037,
+      "min": 81.5,
+      "max": 1249.875,
+      "run_means": [
+        88.91886699999999,
+        89.53075299999999,
+        87.749533,
+        88.195712,
+        90.105039
+      ],
+      "run_mean_ci_low": 87.71084138410218,
+      "run_mean_ci_high": 90.08912021589784
+    },
+    "B_rule_checks": {
+      "n": 5000,
+      "median": 2.959,
+      "q1": 2.833,
+      "q3": 3.20875,
+      "mean": 3.5361491999999997,
+      "sd": 5.893366363731241,
+      "min": 2.583,
+      "max": 348.709,
+      "run_means": [
+        2.996659,
+        3.034371,
+        3.833294,
+        4.526776,
+        3.2896460000000003
+      ],
+      "run_mean_ci_low": 2.733210369613275,
+      "run_mean_ci_high": 4.3390880303867245
+    },
+    "B_registry_claim": {
+      "n": 5000,
+      "median": 248.125,
+      "q1": 232.59425,
+      "q3": 275.11475,
+      "mean": 282.00273500000003,
+      "sd": 337.23609383146123,
+      "min": 204.834,
+      "max": 17393.375,
+      "run_means": [
+        252.507588,
+        276.545704,
+        284.794036,
+        326.237167,
+        269.92918
+      ],
+      "run_mean_ci_low": 247.94725650398487,
+      "run_mean_ci_high": 316.05821349601507
+    },
+    "registry_claim_in_memory": {
+      "n": 5000,
+      "median": 4.584,
+      "q1": 4.333,
+      "q3": 5.292,
+      "mean": 5.5915074,
+      "sd": 6.226508303461569,
+      "min": 3.916,
+      "max": 306.833,
+      "run_means": [
+        4.881517,
+        4.814654000000001,
+        5.895321,
+        7.1097600000000005,
+        5.256285
+      ],
+      "run_mean_ci_low": 4.410914825663296,
+      "run_mean_ci_high": 6.7720999743367045
+    }
+  },
+  "scaling_us": [
+    {
+      "memo_bytes": 0,
+      "record_bytes": 122,
+      "median": 3.959,
+      "mean": 3.9786219999999997,
+      "sd": 0.04620658139447416
+    },
+    {
+      "memo_bytes": 64,
+      "record_bytes": 196,
+      "median": 4.291,
+      "mean": 4.2896719999999995,
+      "sd": 0.08255217306211435
+    },
+    {
+      "memo_bytes": 128,
+      "record_bytes": 260,
+      "median": 4.459,
+      "mean": 4.482025999999999,
+      "sd": 0.072861898000122
+    },
+    {
+      "memo_bytes": 256,
+      "record_bytes": 388,
+      "median": 4.958,
+      "mean": 4.972938,
+      "sd": 0.2971505824066724
+    },
+    {
+      "memo_bytes": 512,
+      "record_bytes": 644,
+      "median": 5.834,
+      "mean": 5.855139,
+      "sd": 0.29601266725966
+    },
+    {
+      "memo_bytes": 1024,
+      "record_bytes": 1156,
+      "median": 7.208,
+      "mean": 7.197764,
+      "sd": 0.07960200237922903
+    },
+    {
+      "memo_bytes": 2048,
+      "record_bytes": 2180,
+      "median": 10.084,
+      "mean": 10.167305,
+      "sd": 0.5795567565036309
+    },
+    {
+      "memo_bytes": 4096,
+      "record_bytes": 4228,
+      "median": 15.834,
+      "mean": 15.927351,
+      "sd": 0.22657678353670269
+    },
+    {
+      "memo_bytes": 8192,
+      "record_bytes": 8324,
+      "median": 27.334,
+      "mean": 27.527715,
+      "sd": 0.899932044912537
+    },
+    {
+      "memo_bytes": 16384,
+      "record_bytes": 16516,
+      "median": 50.542,
+      "mean": 50.909518000000006,
+      "sd": 1.139669938730177
+    },
+    {
+      "memo_bytes": 32768,
+      "record_bytes": 32900,
+      "median": 115.3955,
+      "mean": 108.870607,
+      "sd": 8.895578562325753
+    },
+    {
+      "memo_bytes": 65536,
+      "record_bytes": 65668,
+      "median": 192.459,
+      "mean": 195.423764,
+      "sd": 15.421677367041404
+    },
+    {
+      "memo_bytes": 131072,
+      "record_bytes": 131204,
+      "median": 374.125,
+      "mean": 376.745203,
+      "sd": 5.258171575377424
+    },
+    {
+      "memo_bytes": 262144,
+      "record_bytes": 262276,
+      "median": 745.3125,
+      "mean": 754.537019,
+      "sd": 31.84666419270379
+    },
+    {
+      "memo_bytes": 524288,
+      "record_bytes": 524420,
+      "median": 1500.104,
+      "mean": 1547.010491,
+      "sd": 157.42140923313087
+    },
+    {
+      "memo_bytes": 1048576,
+      "record_bytes": 1048708,
+      "median": 3002.4165000000003,
+      "mean": 3077.7907609999997,
+      "sd": 249.87398976412996
+    }
+  ],
+  "storage": {
+    "commitment_bytes": 32,
+    "signature_bytes": 64,
+    "statement_bytes": 282,
+    "design_public_record_bytes": 589,
+    "baseline_A_public_record_bytes": 122,
+    "baseline_B_public_record_bytes": 265,
+    "private_opening_bytes": 154
+  },
+  "privacy": [
+    [
+      "Donation ID",
+      "Public",
+      "Public",
+      "Public"
+    ],
+    [
+      "Amount",
+      "Public",
+      "Public",
+      "Hidden from public; auditor sees it"
+    ],
+    [
+      "Donor ID",
+      "Public",
+      "Public",
+      "Hidden from public; auditor sees it"
+    ],
+    [
+      "Charity ID",
+      "Public",
+      "Public",
+      "Hidden from public; auditor sees it"
+    ],
+    [
+      "Nonce",
+      "Not used",
+      "Not used",
+      "Donor and auditor only"
+    ],
+    [
+      "Commitment",
+      "Not used",
+      "Not used",
+      "Public"
+    ],
+    [
+      "Signed statement",
+      "Not used",
+      "Charity signature",
+      "Auditor attestation"
+    ]
+  ],
+  "environment": {
+    "os": "macOS-15.7.7-arm64-arm-64bit-Mach-O",
+    "python": "3.14.4",
+    "machine": "arm64",
+    "cpus": 8,
+    "memory": "",
+    "cryptography": "50.0.2",
+    "sqlite": "3.53.0",
+    "timer_floor_median_us": 0.083
+  },
+  "settings": {
+    "warmup": 50,
+    "trials": 1000,
+    "runs": 5
+  }
+}
